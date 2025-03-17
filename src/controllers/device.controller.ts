@@ -8,9 +8,7 @@ export const createDefaultDevice = async (c: Context) => {
   try {
     const defaultDevice = {
       name: "Device Par Défaut",
-      type: "sensor",
-      status: "on",
-      createdAt: new Date(),
+      type: "sensor"
     };
 
     const parsedDevice = DeviceSchema.parse(defaultDevice);
