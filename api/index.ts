@@ -3,15 +3,15 @@ import { Hono } from 'hono'
 import { cors } from "hono/cors";
 import deviceRouter from "./routes/device.routes";
 
+// const app = new Hono().basePath('/api')
 const app = new Hono()
-
 app.use(cors())
 
 app.get('/', (c) => {
-  return c.text('Hello Hono!')
+  return c.json({ message: "Hello World" })
 })
 
-app.route("/devices", deviceRouter);
+// app.route("/devices", deviceRouter);
 
 
 serve({

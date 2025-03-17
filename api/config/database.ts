@@ -6,7 +6,7 @@ const DB_NAME = process.env.DB_NAME || "honoDB";
 const client = new MongoClient(MONGO_URI);
 let db: Db;
 
-export const connectDB = async () => {
+const connectDB = async () => {
   if (!db) {
     await client.connect();
     db = client.db(DB_NAME);
@@ -14,3 +14,5 @@ export const connectDB = async () => {
   }
   return db;
 };
+
+export default connectDB;

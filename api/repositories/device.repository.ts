@@ -1,7 +1,7 @@
-import { connectDB } from "../config/database";
+import  connectDB  from "../config/database";
 import { ObjectId } from "mongodb";
 
-export class DeviceRepository {
+class DeviceRepository {
   private collection = "devices";
 
   async getAll() {
@@ -32,3 +32,5 @@ export class DeviceRepository {
     return db.collection(this.collection).deleteOne({ _id: new ObjectId(id) });
   }
 }
+
+export default DeviceRepository;

@@ -1,8 +1,11 @@
 {
-  "name": "api-local-2",
+  "name": "api-local",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/index.ts"
+    "dev": "tsx watch api/index.ts",
+    "build": "tsx build api/index.ts",
+    "start": "vercel dev",
+    "deploy": "vercel"
   },
   "dependencies": {
     "@hono/node-server": "^1.13.8",
@@ -12,6 +15,9 @@
   },
   "devDependencies": {
     "@types/node": "^20.11.17",
-    "tsx": "^4.7.1"
+    "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.7.1",
+    "vercel": "^32.4.1"
+
   }
 }

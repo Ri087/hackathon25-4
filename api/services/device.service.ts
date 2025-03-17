@@ -1,6 +1,6 @@
-import { DeviceRepository } from "../repositories/device.repository";
+import  DeviceRepository  from "../repositories/device.repository";
 
-export class DeviceService {
+class DeviceService {
   private deviceRepo = new DeviceRepository();
 
   async getAllDevices() {
@@ -23,3 +23,5 @@ export class DeviceService {
     return this.deviceRepo.delete(id);
   }
 }
+
+export default DeviceService;

@@ -1,6 +1,6 @@
 import { Context } from "hono";
-import { DeviceService } from "../services/device.service";
-import { DeviceSchema } from "../models/device.model";
+import  DeviceService  from "../services/device.service";
+import  DeviceSchema  from "../models/device.model";
 
 const deviceService = new DeviceService();
 
