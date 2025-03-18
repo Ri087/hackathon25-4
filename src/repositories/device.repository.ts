@@ -9,6 +9,11 @@ export class DeviceRepository {
     return db.collection(this.collection).find().toArray();
   }
 
+  async getByLabel(label: string) {
+    const db = await connectDB();
+    return db.collection(this.collection).findOne({ label });
+  }
+
   async getById(id: string) {
     const db = await connectDB();
     return db.collection(this.collection).findOne({ id });
@@ -32,7 +37,7 @@ export class DeviceRepository {
     );
   }
 
-  async updateByCustomId(id: string, device: any) {
+  async updateById(id: string, device: any) {
     const db = await connectDB();
     return db.collection(this.collection).updateOne(
       { id: id },

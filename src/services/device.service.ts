@@ -7,6 +7,10 @@ export class DeviceService {
     return this.deviceRepo.getAll();
   }
 
+  async getDeviceByLabel(label: string) {
+    return this.deviceRepo.getByLabel(label);
+  }
+
   async getDeviceById(id: string) {
     return this.deviceRepo.getById(id);
   }
@@ -19,12 +23,12 @@ export class DeviceService {
     return this.deviceRepo.create(device);
   }
 
-  async updateDevice(id: string, device: any) {
+  async updateDeviceByObjectId(id: string, device: any) {
     return this.deviceRepo.update(id, device);
   }
 
-  async updateDeviceByCustomId(id: string, device: any) {
-    return this.deviceRepo.updateByCustomId(id, device);
+  async updateDeviceById(id: string, device: any) {
+    return this.deviceRepo.updateById(id, device);
   }
 
   async deleteDevice(id: string) {

@@ -2,18 +2,22 @@ import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
 import { cors } from "hono/cors";
 import deviceRouter from "./routes/device.routes";
-import MqttService from "./services/mqtt.service"
+import "./services/mqtt.service";
+import { connectDB } from './config/database';
 
 const app = new Hono()
 
 app.use(cors())
 
 app.get('/', (c) => {
-  MqttService.publish("HomeConnect/ESP32Light", "ON")
   return c.text('mqtt ok !')
 })
 
 app.route("/devices", deviceRouter);
+
+connectDB().then(() => {
+  console.log("🔌 Connexion à la base de données établie")
+});
 
 
 serve({

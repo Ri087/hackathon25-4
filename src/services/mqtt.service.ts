@@ -85,7 +85,7 @@ class MqttService {
           }
 
           const updatedDevice = { ...device, status: message.toString() === "ON" };
-          await this.deviceService.updateDeviceByCustomId(deviceId, updatedDevice);
+          await this.deviceService.updateDeviceById(deviceId, updatedDevice);
           console.log(`🔄 Device ${deviceId} mis à jour avec status: ${updatedDevice.status}`);
         } catch (error) {
           console.error("❌ Erreur lors de la mise à jour du device:", error);
