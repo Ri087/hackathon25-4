@@ -1,16 +1,16 @@
 import { Context } from "hono";
 import { DeviceService } from "../services/device.service";
 import { DeviceSchema } from "../models/device.model";
+import mqttService from "../services/mqtt.service";
 
 const deviceService = new DeviceService();
 
 export const createDefaultDevice = async (c: Context) => {
   try {
     const defaultDevice = {
-      name: "Device Par Défaut",
-      type: "sensor",
-      status: "on",
-      createdAt: new Date(),
+      id: "default",
+      label: "Device Par Défaut",
+      type: "sensor"
     };
 
     const parsedDevice = DeviceSchema.parse(defaultDevice);
@@ -33,6 +33,11 @@ export const getAllDevices = async (c: Context) => {
 export const getDeviceById = async (c: Context) => {
   const id = c.req.param("id");
   return c.json(await deviceService.getDeviceById(id));
+}
+
+export const getDeviceByObjectId = async (c: Context) => {
+  const id = c.req.param("id");
+  return c.json(await deviceService.getDeviceByObjectId(id));
 };
 
 export const createDevice = async (c: Context) => {
@@ -40,13 +45,30 @@ export const createDevice = async (c: Context) => {
   return c.json(await deviceService.createDevice(body));
 };
 
-export const updateDevice = async (c: Context) => {
+export const updateDeviceByObjectId = async (c: Context) => {
   const id = c.req.param("id");
   const body = await c.req.json();
-  return c.json(await deviceService.updateDevice(id, body));
+
+  if (body.label) {
+    const message = body.status ? "ON" : "OFF";
+    mqttService.publish(`HomeConnect/${body.id}`, message);
+  }
+
+  return c.json(await deviceService.updateDeviceByObjectId(id, body));
+};
+
+export const updateDeviceByCustomId = async (c: Context) => {
+  const id = c.req.param("id");
+  const body = await c.req.json();
+  return c.json(await deviceService.updateDeviceById(id, body));
 };
 
 export const deleteDevice = async (c: Context) => {
   const id = c.req.param("id");
   return c.json(await deviceService.deleteDevice(id));
 };
+
+export const getDeviceByLabel = async (c: Context) => {
+  const label = c.req.param("label");
+  return c.json(await deviceService.getDeviceByLabel(label));
+}
