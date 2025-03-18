@@ -11,6 +11,11 @@ export class DeviceRepository {
 
   async getById(id: string) {
     const db = await connectDB();
+    return db.collection(this.collection).findOne({ id });
+  }
+
+  async getByObjectId(id: string) {
+    const db = await connectDB();
     return db.collection(this.collection).findOne({ _id: new ObjectId(id) });
   }
 
@@ -23,6 +28,14 @@ export class DeviceRepository {
     const db = await connectDB();
     return db.collection(this.collection).updateOne(
       { _id: new ObjectId(id) },
+      { $set: device }
+    );
+  }
+
+  async updateByCustomId(id: string, device: any) {
+    const db = await connectDB();
+    return db.collection(this.collection).updateOne(
+      { id: id },
       { $set: device }
     );
   }

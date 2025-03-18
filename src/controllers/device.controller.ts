@@ -7,7 +7,8 @@ const deviceService = new DeviceService();
 export const createDefaultDevice = async (c: Context) => {
   try {
     const defaultDevice = {
-      name: "Device Par Défaut",
+      id: "default",
+      label: "Device Par Défaut",
       type: "sensor"
     };
 
@@ -31,6 +32,11 @@ export const getAllDevices = async (c: Context) => {
 export const getDeviceById = async (c: Context) => {
   const id = c.req.param("id");
   return c.json(await deviceService.getDeviceById(id));
+}
+
+export const getDeviceByObjectId = async (c: Context) => {
+  const id = c.req.param("id");
+  return c.json(await deviceService.getDeviceByObjectId(id));
 };
 
 export const createDevice = async (c: Context) => {
@@ -42,6 +48,12 @@ export const updateDevice = async (c: Context) => {
   const id = c.req.param("id");
   const body = await c.req.json();
   return c.json(await deviceService.updateDevice(id, body));
+};
+
+export const updateDeviceByCustomId = async (c: Context) => {
+  const id = c.req.param("id");
+  const body = await c.req.json();
+  return c.json(await deviceService.updateDeviceByCustomId(id, body));
 };
 
 export const deleteDevice = async (c: Context) => {
