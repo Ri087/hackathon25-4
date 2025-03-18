@@ -23,6 +23,5 @@ export class OpenaiService {
             response_format: zodResponseFormat(ResearchActionExtraction, "research_action_extraction"),
         });
         return completion.choices[0].message.parsed;
-
     }
 }

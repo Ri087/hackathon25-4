@@ -15,7 +15,7 @@ connectDB().then(() => {
 });
 
 app.get("/", (c) => {
-  return c.text(`Votre clé OpenAI: ${process.env.OPENAI_API_KEY}`);
+  return c.json({"message" : "error: bad url hackathon, try .../devices"})
 });
 
 app.route("/devices", deviceRouter);
