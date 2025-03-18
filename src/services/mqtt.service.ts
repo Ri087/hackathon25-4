@@ -1,8 +1,8 @@
-import { Device, DeviceSchema } from "./../models/device.model";
+import { Device, DeviceSchema } from "../models/device.model";
 import mqtt from "mqtt";
-import { DeviceService } from "../services/device.service";
+import { DeviceService } from "./device.service";
 
-class MqttService {
+export class MqttService {
   private client: mqtt.MqttClient;
   private deviceService = new DeviceService();
 
